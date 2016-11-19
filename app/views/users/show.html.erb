@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
 <div class="form-wrapper">
-<%= @user.username %><% if User.find(params[:id]).admin? %> ADMIN <% end %>
-<% if current_user.admin? || current_user == User.find(params[:id]) %>
+<%= @user.username %><% if User.find_by_username(params[:id]).admin? %> ADMIN <% end %>
+<% if current_user.admin? || current_user == User.find_by_username(params[:id]) %>
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %> 
   <div class="form-group">
@@ -20,4 +20,27 @@
   <% end %>
   <% end %>
 </div>
+      <div class="container">
+          <div id="main-back" style="justify-content:center;align-items:center;margin-top: 65px;"> 
+            <% @tales.each do |tale| %>
+              <div id="dbFront">
+                <div id="content">
+                  <p><%= tale.content %></p>
+                </div>
+                <div id="dream_info">
+                  <div id="dr1" style="float: right;">
+                    <p>Submitted <%= time_ago_in_words(tale.created_at) %> ago by <%= tale.user.username %></p>
+                  </div>
+                  <div id="dr1" style="float: left;">
+                    <%= link_to 'comments', tale %>
+                    <% if tale.user == current_user || current_user.admin? %>
+                      <%= link_to 'edit', edit_tale_path(tale) %>
+                      <%= link_to 'delete', @tale, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+      </div>
 <% end %>

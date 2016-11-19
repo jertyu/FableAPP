@@ -1,0 +1,1 @@
+json.array! @tales, partial: 'tales/tale', as: :tale

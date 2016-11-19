@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :tales
+  resources :submissions
   devise_for :users
-	root to: "posts#index"
-	get "/home" => "posts#index"
+	root to: "tales#index"
+	get "/home" => "tales#index"
   get "/users" => "users#index"
 
 
