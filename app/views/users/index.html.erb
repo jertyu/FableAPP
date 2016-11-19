@@ -1,0 +1,6 @@
+<div class="form-wrapper">
+	<% @users.each do |u| %>
+<%= link_to u.username, user_path(u) %>
+<% end %>
+
+</div>
