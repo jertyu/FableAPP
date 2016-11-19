@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 	root to: "tales#index"
 	get "/home" => "tales#index"
-  get "/users" => "users#index"
+  get "/u/" => "users#index"
 
 
 	devise_scope :user do
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   		get "/register" => "devise/registrations#new"
   		get "/settings" => "devise/registrations#edit"
    		get '/signout', to: 'devise/sessions#destroy', as: :signout
-      get '/users/:id', :to => 'users#show',  :as => :user
+      get '/u/:id', :to => 'users#show',  :as => :user
 	end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

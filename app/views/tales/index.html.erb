@@ -8,7 +8,7 @@
                 </div>
                 <div id="dream_info">
                   <div id="dr1" style="float: right;">
-                    <p>Submitted <%= time_ago_in_words(tale.created_at) %> ago by <%= link_to tale.user.username, user_path(tale.username) %></p>
+                    <p>Submitted <%= time_ago_in_words(tale.created_at) %> ago by <%= link_to tale.user.username, user_path(tale.user.username) %></p>
                   </div>
                   <div id="dr1" style="float: left;">
                     <%= link_to 'comments', tale %>
