@@ -1,6 +1,6 @@
 class TalesController < ApplicationController
   before_action :set_tale, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /tales
   # GET /tales.json
   def index
