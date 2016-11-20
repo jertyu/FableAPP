@@ -6,13 +6,13 @@
                   <p><%= tale.content %></p>
                   <div id="dream_info">
                     <div id="dr1" style="float: right;">
-                    <%= link_to tale.user.username, user_path(tale.user.username) %> <%= time_ago_in_words(tale.created_at) %> ago
+                    <p><%= link_to tale.user.username, user_path(tale.user.username) %> <%= time_ago_in_words(tale.created_at) %> ago</p>
                   </div>
                   <div id="dr1" style="float: left;">
-                    <%= link_to 'comments', tale %>
+                    <p><%= link_to 'comments', tale %>
                     <% if current_user && tale.user == current_user || current_user && current_user.admin? %>
                       <%= link_to 'edit', edit_tale_path(tale) %>
-                      <%= link_to 'delete', @tale, method: :delete, data: { confirm: 'Are you sure?' } %>
+                      <%= link_to 'delete', @tale, method: :delete, data: { confirm: 'Are you sure?' } %></p>
                     <% end %>
                   </div>
                 </div>

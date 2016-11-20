@@ -1,46 +1,39 @@
-<% if current_user.nil? %>
-      <div class="form-wrapper">
-        <p>Must be logged into view Members</p>
-      </div>
-<% else%>
 <% if User.find_by_username(params[:id]) %>
 <div class="container">
-<div id="main-back" style="justify-content:center;align-items:center;margin-top: 65px;"> 
-<div class="post-wrapper">
-<div id="content">
-<p>
-<%= @user.username %><% if User.find_by_username(params[:id]).admin? %> ADMIN <% end %>
-<% if current_user && current_user == User.find_by_username(params[:id]) %> | 
-<%= link_to "Settings",  edit_user_registration_path %>
-</p>
-  <% end %>
-  </div>
-</div>
-
-            <% @tales.each do |tale| %>
-              <div class="post-wrapper">
-                <div id="content">
-                  <p><%= tale.content %></p>
-                  <div id="dream_info">
-                    <div id="dr1" style="float: right;">
-                     <%= link_to tale.user.username, user_path(tale.user.username) %> <%= time_ago_in_words(tale.created_at) %> ago
-                  </div>
-                  <div id="dr1" style="float: left;">
-                    <%= link_to 'comments', tale %>
-                    <% if current_user && tale.user == current_user || current_user && current_user.admin? %>
-                      <%= link_to 'edit', edit_tale_path(tale) %>
-                      <%= link_to 'delete', @tale, method: :delete, data: { confirm: 'Are you sure?' } %>
-                    <% end %>
-                  </div>
-                </div>
-                </div>
-              </div>
+   <div id="main-back" style="justify-content:center;align-items:center;margin-top: 65px;">
+      <div class="post-wrapper">
+         <div id="content">
+            <p>
+               <%= @user.username %><% if User.find_by_username(params[:id]).admin? %> ADMIN <% end %>
+               <% if current_user && current_user == User.find_by_username(params[:id]) %> | 
+               <%= link_to "Settings",  edit_user_registration_path %>
+            </p>
             <% end %>
-          </div>
+         </div>
       </div>
-      <% else %>
-      <div class="form-wrapper">
-        <p>User not found</p>
+      <% @tales.each do |tale| %>
+      <div class="post-wrapper">
+         <div id="content">
+            <p><%= tale.content %></p>
+            <div id="dream_info">
+               <div id="dr1" style="float: right;">
+                  <p><%= link_to tale.user.username, user_path(tale.user.username) %> <%= time_ago_in_words(tale.created_at) %> ago</p>
+               </div>
+               <div id="dr1" style="float: left;">
+                  <p><%= link_to 'comments', tale %>
+                  <% if current_user && tale.user == current_user || current_user && current_user.admin? %>
+                  <%= link_to 'edit', edit_tale_path(tale) %>
+                  <%= link_to 'delete', @tale, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                  <% end %>
+               </div>
+            </div>
+         </div>
       </div>
-<% end %>
+      <% end %>
+   </div>
+</div>
+<% else %>
+<div class="form-wrapper">
+   <p>User not found</p>
+</div>
 <% end %>

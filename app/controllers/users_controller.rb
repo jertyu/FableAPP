@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find_by_username(params[:id])
 
-		@user_tale = Tale.where(:user_id => current_user.id)
+		@user_tale = @user.tale
 		@tales = @user_tale.order('created_at DESC')
 	end
 	def index
