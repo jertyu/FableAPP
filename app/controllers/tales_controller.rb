@@ -1,6 +1,8 @@
 class TalesController < ApplicationController
   before_action :set_tale, only: [:show, :edit, :update, :destroy]
-  
+    before_filter :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
+
   # GET /tales
   # GET /tales.json
   def index
@@ -64,6 +66,7 @@ class TalesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tale
       @tale = Tale.find(params[:id])
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

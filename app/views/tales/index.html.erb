@@ -1,25 +1,23 @@
-     <% if user_signed_in? %>
       <div class="container">
-          <div id="main-back" style="justify-content:center;align-items:center;margin-top: 65px;"> 
+          <div id="main-back" style="justify-content:center;align-items:center;margin-top: 60px;"> 
             <% @tales.each do |tale| %>
-              <div id="dbFront">
+              <div class="post-wrapper">
                 <div id="content">
                   <p><%= tale.content %></p>
-                </div>
-                <div id="dream_info">
-                  <div id="dr1" style="float: right;">
-                    <p>Submitted <%= time_ago_in_words(tale.created_at) %> ago by <%= link_to tale.user.username, user_path(tale.user.username) %></p>
+                  <div id="dream_info">
+                    <div id="dr1" style="float: right;">
+                    <%= link_to tale.user.username, user_path(tale.user.username) %> <%= time_ago_in_words(tale.created_at) %> ago
                   </div>
                   <div id="dr1" style="float: left;">
                     <%= link_to 'comments', tale %>
-                    <% if tale.user == current_user || current_user.admin? %>
+                    <% if current_user && tale.user == current_user || current_user && current_user.admin? %>
                       <%= link_to 'edit', edit_tale_path(tale) %>
                       <%= link_to 'delete', @tale, method: :delete, data: { confirm: 'Are you sure?' } %>
                     <% end %>
                   </div>
                 </div>
+                </div>
               </div>
             <% end %>
           </div>
       </div>
-      <% end %>
