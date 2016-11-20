@@ -2,6 +2,7 @@ class TalesController < ApplicationController
   before_action :set_tale, only: [:show, :edit, :update, :destroy]
     before_filter :authenticate_user!, except: [:index, :show]
   before_action :authenticate_user!
+  before_action :owned_tale, only: [:edit, :update, :destroy]  
 
   # GET /tales
   # GET /tales.json
@@ -73,4 +74,10 @@ class TalesController < ApplicationController
     def tale_params
       params.require(:tale).permit(:content)
     end
+    def owned_tale 
+      unless current_user && current_user == @tale.user || current_user && current_user.admin? 
+      flash[:alert] = "That post doesn't belong to you!"
+      redirect_to root_path
+    end
+end  
 end

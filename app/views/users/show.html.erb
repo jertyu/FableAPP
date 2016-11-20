@@ -21,9 +21,10 @@
                </div>
                <div id="dr1" style="float: left;">
                   <p><%= link_to 'comments', tale %>
-                  <% if current_user && tale.user == current_user || current_user && current_user.admin? %>
-                  <%= link_to 'edit', edit_tale_path(tale) %>
-                  <%= link_to 'delete', @tale, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                     <% if current_user && tale.user == current_user || current_user && current_user.admin? %>
+                     <%= link_to 'edit', edit_tale_path(tale) %>
+                     <%= link_to 'delete', @tale, method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </p>
                   <% end %>
                </div>
             </div>

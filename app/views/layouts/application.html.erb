@@ -1,178 +1,165 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>FableAPP</title>
-    <%= csrf_meta_tags %>
-    <%= javascript_include_tag "application" %>
-    <link rel='stylesheet' href='http://unitedreams.net/main.css'>
-    <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <style>
-body {  
-  background-color: #fafafa;
-  font-family: proxima-nova, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  padding-top: 0px;
-}
-
-.navbar-brand {
-  a {
-    color: #125688;
-  }
-}
-#dr1 p {
-	font-size: 12px;
-}
-
-.navbar-default {
-  background-color: #fff;
-  height: 54px;
-  .navbar-nav li a {
-    color: #125688;
-  }
-}
-
-.navbar-container {
-  width: 55%;
-  min-width: 410px;
-  margin: 0 auto;
-}
-
-.post {
-  background-color: #fff;
-  border-color: #edeeee;
-  border-style: solid;
-  border-radius: 3px;
-  border-width: 1px;
-  margin-bottom: 60px;
-}
-
-.post-head {
-  height: 64px;
-  padding: 14px 20px;
-  color: #125688;
-  font-size: 15px;
-  line-height: 18px;
-  .thumbnail {}
-  .name {
-    display: block;
-  }
-}
-
-.image {
-  border-bottom: 1px solid #eeefef;
-  border-top: 1px solid #eeefef;
-}
-
-.caption {
-  padding: 24px 24px;
-  font-size: 15px;
-  line-height: 18px;
-
-}
-
-.form-wrapper {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: #fff;
-  border: 1px solid #eeefef;
-  border-radius: 3px;
-}
-.post-wrapper {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  margin-bottom: 5px;
-  background-color: #fff;
-  border: 1px solid #eeefef;
-  border-radius: 3px;
-}
-
-.edit-links {
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
-</style>
-</head>
-
-  <body>
-  <% if user_signed_in? %>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="navbar-container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/home">FableAPP</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-left">
-
-				<div class="form-group">
-          			<%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search Users' %>
-        		</div>	
-
-      </form>
-          <ul class="nav navbar-nav navbar-right">
-      	<li>
-          <%= link_to current_user.username, current_user %>
-        </li>
-
-        <li>
-          <%= link_to 'Home', '/home' %>
-        </li>
-        <li>
-          <%= link_to 'Settings', edit_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to 'Members', '/users' %>
-        </li>
-        <li>
-          <%= link_to 'Logout', '/logout' %>
-        </li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    <% else %>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="navbar-container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/home">FableAPP</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-left">
-      </form>
-          <ul class="nav navbar-nav navbar-right">
-        <li>
-          <%= link_to 'Home', '/home' %>
-        </li>
-        <li>
-          <%= link_to 'Login', '/login' %>
-        </li>
-        <li>
-          <%= link_to 'Register', '/register' %>
-        </li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    <% end %>
-    <%# flash.each do |name, msg| %>
+   <head>
+      <title>FableAPP</title>
+      <%= csrf_meta_tags %>
+      <%= javascript_include_tag "application" %>
+      <link rel='stylesheet' href='http://unitedreams.net/main.css'>
+      <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+      <style>
+         body {  
+         background-color: #fafafa;
+         font-family: proxima-nova, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+         padding-top: 0px;
+         }
+         .navbar-brand {
+         a {
+         color: #125688;
+         }
+         }
+         #dr1 p {
+         font-size: 12px;
+         }
+         .navbar-default {
+         background-color: #fff;
+         height: 54px;
+         .navbar-nav li a {
+         color: #125688;
+         }
+         }
+         .navbar-container {
+         width: 55%;
+         min-width: 410px;
+         margin: 0 auto;
+         }
+         .post {
+         background-color: #fff;
+         border-color: #edeeee;
+         border-style: solid;
+         border-radius: 3px;
+         border-width: 1px;
+         margin-bottom: 60px;
+         }
+         .post-head {
+         height: 64px;
+         padding: 14px 20px;
+         color: #125688;
+         font-size: 15px;
+         line-height: 18px;
+         .thumbnail {}
+         .name {
+         display: block;
+         }
+         }
+         .image {
+         border-bottom: 1px solid #eeefef;
+         border-top: 1px solid #eeefef;
+         }
+         .caption {
+         padding: 24px 24px;
+         font-size: 15px;
+         line-height: 18px;
+         }
+         .form-wrapper {
+         width: 100%;
+         max-width: 600px;
+         margin: 0 auto;
+         background-color: #fff;
+         border: 1px solid #eeefef;
+         border-radius: 3px;
+         }
+         .post-wrapper {
+         width: 100%;
+         max-width: 600px;
+         margin: 0 auto;
+         margin-bottom: 5px;
+         background-color: #fff;
+         border: 1px solid #eeefef;
+         border-radius: 3px;
+         }
+         .edit-links {
+         margin-top: 20px;
+         margin-bottom: 40px;
+         }
+      </style>
+   </head>
+   <body>
+      <% if user_signed_in? %>
+      <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="navbar-container">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="/home">FableAPP</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+               <form class="navbar-form navbar-left">
+                  <div class="form-group">
+                     <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search Users' %>
+                  </div>
+               </form>
+               <ul class="nav navbar-nav navbar-right">
+                  <li>
+                     <%= link_to current_user.username, current_user %>
+                  </li>
+                  <li>
+                     <%= link_to 'Home', '/home' %>
+                  </li>
+                  <li>
+                     <%= link_to 'Settings', edit_user_registration_path %>
+                  </li>
+                  <li>
+                     <%= link_to 'Members', '/users' %>
+                  </li>
+                  <li>
+                     <%= link_to 'Logout', '/logout' %>
+                  </li>
+               </ul>
+            </div>
+            <!--/.nav-collapse -->
+         </div>
+      </nav>
+      <% else %>
+      <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="navbar-container">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="/home">FableAPP</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+               <form class="navbar-form navbar-left">
+               </form>
+               <ul class="nav navbar-nav navbar-right">
+                  <li>
+                     <%= link_to 'Home', '/home' %>
+                  </li>
+                  <li>
+                     <%= link_to 'Login', '/login' %>
+                  </li>
+                  <li>
+                     <%= link_to 'Register', '/register' %>
+                  </li>
+               </ul>
+            </div>
+            <!--/.nav-collapse -->
+         </div>
+      </nav>
+      <% end %>
+      <%# flash.each do |name, msg| %>
       <%#= content_tag(:div, msg, class: "alert alert-#{name}") %>
-    <%# end %>
-    <%= yield %>
-  </body>
+      <%# end %>
+      <%= yield %>
+   </body>
 </html>
