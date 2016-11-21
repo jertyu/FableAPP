@@ -1,6 +1,6 @@
 class TalesController < ApplicationController
   before_action :set_tale, only: [:show, :edit, :update, :destroy]
-    before_filter :authenticate_user!, except: [:index, :show]
+    before_action :authenticate_user!, except: [:index, :show]
   before_action :authenticate_user!
   before_action :owned_tale, only: [:edit, :update, :destroy]  
 

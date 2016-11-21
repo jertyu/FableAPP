@@ -1,4 +1,14 @@
-<% if User.find_by_username(params[:id]) %>
+<% if @user.blank? %>
+<div class="container">
+   <div id="main-back" style="justify-content:center;align-items:center;margin-top: 65px;">
+      <div class="post-wrapper">
+         <div id="content">
+            <p>User not found</p>
+         </div>
+      </div>
+   </div>
+</div>
+<% else %>
 <div class="container">
    <div id="main-back" style="justify-content:center;align-items:center;margin-top: 65px;">
       <div class="post-wrapper">
@@ -32,9 +42,5 @@
       </div>
       <% end %>
    </div>
-</div>
-<% else %>
-<div class="form-wrapper">
-   <p>User not found</p>
 </div>
 <% end %>

@@ -12,7 +12,7 @@
                   <p><%= link_to 'comments', tale %>
                      <% if current_user && tale.user == current_user || current_user && current_user.admin? %>
                      <%= link_to 'edit', edit_tale_path(tale) %>
-                     <%= link_to 'delete', @tale, method: :delete, data: { confirm: 'Are you sure?' } %>
+                     <%= link_to 'delete', tale_path(tale.id), method: :delete, data: { confirm: 'Are you sure?' } %>
                   </p>
                   <% end %>
                </div>
