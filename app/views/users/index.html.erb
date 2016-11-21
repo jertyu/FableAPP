@@ -1,6 +1,11 @@
-<div class="form-wrapper">
-	<% @users.each do |u| %>
-<%= link_to u.username, user_path(u) %>
-<% end %>
-
+<div class="container">
+   <div id="main-back" style="justify-content:center;align-items:center;margin-top: 65px;">
+      <div class="post-wrapper">
+         <div id="content">
+            <p><% @users.each do |u| %>
+			<%= link_to u.username, user_path(u) %>
+			<% end %></p>
+         </div>
+      </div>
+   </div>
 </div>

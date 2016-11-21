@@ -10,7 +10,8 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
       <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
       <style>
-         body {  
+      	/* CSS built into layout for development */
+         body {
          background-color: #fafafa;
          font-family: proxima-nova, 'Helvetica Neue', Arial, Helvetica, sans-serif;
          padding-top: 0px;
@@ -87,7 +88,8 @@
       </style>
    </head>
    <body>
-      <% if user_signed_in? %>
+      <% if user_signed_in? #Checks if there's a current_user %> 
+      <!-- Append layout if current_user = true !-->
       <nav class="navbar navbar-default navbar-fixed-top">
          <div class="navbar-container">
             <div class="navbar-header">
@@ -97,7 +99,7 @@
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="/home">FableAPP</a>
+               <a class="navbar-brand" href="/">FableAPP</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                <form class="navbar-form navbar-left">
@@ -110,7 +112,7 @@
                      <%= link_to current_user.username, current_user %>
                   </li>
                   <li>
-                     <%= link_to 'Home', '/home' %>
+                     <%= link_to 'Home', '/' %>
                   </li>
                   <li>
                      <%= link_to 'Settings', edit_user_registration_path %>
@@ -127,6 +129,7 @@
          </div>
       </nav>
       <% else %>
+      <!-- Append layout if current_user = nil !-->
       <nav class="navbar navbar-default navbar-fixed-top">
          <div class="navbar-container">
             <div class="navbar-header">
@@ -136,14 +139,14 @@
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="/home">FableAPP</a>
+               <a class="navbar-brand" href="/">FableAPP</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                <form class="navbar-form navbar-left">
                </form>
                <ul class="nav navbar-nav navbar-right">
                   <li>
-                     <%= link_to 'Home', '/home' %>
+                     <%= link_to 'Home', '/' %>
                   </li>
                   <li>
                      <%= link_to 'Login', '/login' %>

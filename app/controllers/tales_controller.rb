@@ -1,33 +1,28 @@
 class TalesController < ApplicationController
   before_action :set_tale, only: [:show, :edit, :update, :destroy]
-    before_action :authenticate_user!, except: [:index, :show]
-  before_action :authenticate_user!
-  before_action :owned_tale, only: [:edit, :update, :destroy]  
+  before_action :authenticate_user! #All index#action require current_user
+  before_action :owned_tale, only: [:edit, :update, :destroy] #Denies access to :edit,:update,:destroy unless fit condition
 
-  # GET /tales
-  # GET /tales.json
-  def index
-    @tales = Tale.order(created_at: :desc)
+  # GET
+  def index #Root
+    @tales = Tale.order(created_at: :desc) #Tales#Index @tales in DESCENDING order
+  end
+  # GET
+  def show #/tales/:id
+    #Tales#Show empty action for append tale
+  end
+  # GET
+  def new #/tales/new
+    @tale = Tale.new 
   end
 
-  # GET /tales/1
-  # GET /tales/1.json
-  def show
+  # GET
+  def edit #/tales/:id/edit
   end
 
-  # GET /tales/new
-  def new
-    @tale = Tale.new
-  end
-
-  # GET /tales/1/edit
-  def edit
-  end
-
-  # POST /tales
-  # POST /tales.json
+  # POST
   def create
-    @tale = current_user.tale.build(tale_params)
+    @tale = current_user.tale.build(tale_params) #Sets new tale to current_user.tale
     respond_to do |format|
       if @tale.save
         format.html { redirect_to @tale, notice: 'Tale was successfully created.' }
@@ -39,8 +34,7 @@ class TalesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tales/1
-  # PATCH/PUT /tales/1.json
+  # PATCH / PUT
   def update
     respond_to do |format|
       if @tale.update(tale_params)
@@ -53,8 +47,7 @@ class TalesController < ApplicationController
     end
   end
 
-  # DELETE /tales/1
-  # DELETE /tales/1.json
+  # DELETE
   def destroy
     @tale.destroy
     respond_to do |format|
@@ -64,20 +57,19 @@ class TalesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tale
-      @tale = Tale.find(params[:id])
+
+    def set_tale #set tale value
+      @tale = Tale.find(params[:id]) #tale=tale.id
 
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def tale_params
-      params.require(:tale).permit(:content)
+    def tale_params #set tale params
+      params.require(:tale).permit(:content) #Only content atm. Will have categories, and may have titles. 
     end
-    def owned_tale 
-      unless current_user && current_user == @tale.user || current_user && current_user.admin? 
-      flash[:alert] = "That post doesn't belong to you!"
-      redirect_to root_path
+    def owned_tale #tale auth
+      unless current_user && current_user == @tale.user || current_user && current_user.admin?#current_user=@tale.user or current_user.admin?
+      flash[:alert] = "Access denied" #flash msg
+      redirect_to root_path #redirect
     end
 end  
 end

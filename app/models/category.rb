@@ -1,3 +1,4 @@
 class Category < ApplicationRecord
-	belongs_to :tale
+	#Will allow users to set a category for their tales
+	belongs_to :tale #sets relationship with tale
 end
