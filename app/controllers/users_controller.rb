@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
   before_action :authenticate_user! #All user#action require current_user
+  before_action :owned_user, only: [:edit_user] #Denies access to :edit,:update,:destroy unless fit condition
+
 	# GET
 	def show #/u/:id
 		@user = User.find_by_username(params[:id]) #Sets @user equal to (params[:id])
+		if @user.present? # checks if @user exists
 		@user_tale = @user.tale #Sets @user_tale equal to @user.tale
 		@tales = @user_tale.order('created_at DESC') #Sets @user_tale = to @user_tale.order
-		#Basically this is a bad hack to set the @user.tale, and then make it descending
+		end
+		#Basically this is a bad hack to set @tales to descending. Also if a user exists. 
 		@tale = Tale.new
 	end
 
@@ -15,4 +19,13 @@ class UsersController < ApplicationController
 	end
 	def comment_section
 	end
+	def edit_user
+		@user = User.find_by_username(params[:id])
+	end
+    def owned_user #user auth
+      unless current_user && current_user == User.find_by_username(params[:id]) || current_user && current_user.admin? #edit_user auth
+      flash[:alert] = "Access denied" #flash msg
+      redirect_to root_path #temporary redirect
+    end	
+end
 end
