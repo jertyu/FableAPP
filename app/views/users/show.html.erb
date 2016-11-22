@@ -14,13 +14,27 @@
       <div class="post-wrapper">
          <div id="content">
             <p>
-               <%= @user.username %><% if User.find_by_username(params[:id]).admin? %> ADMIN <% end %>
+               <%= @user.username %> #<%= @user.id %><% if User.find_by_username(params[:id]).admin? %> ADMIN <% end %>
                <% if current_user && current_user == User.find_by_username(params[:id]) %> | 
                <%= link_to "Settings",  edit_user_registration_path %>
             </p>
             <% end %>
          </div>
       </div>
+      <% if current_user && current_user == User.find_by_username(params[:id]) %>
+      <div class="post-wrapper">
+         <div id="content">
+            <%= simple_form_for @tale, html: { class: 'form-horizontal', multipart: true } do |f| %>
+         <div class="form-group text-center">
+            <%= f.input :content %>
+         </div>
+         <div class="form-group text-center">
+            <%= f.button :submit, class: 'btn-success' %>
+         </div>
+            <% end %>
+         </div>
+      </div>
+      <% end %>
       <% @tales.each do |tale| %>
       <div class="post-wrapper">
          <div id="content">

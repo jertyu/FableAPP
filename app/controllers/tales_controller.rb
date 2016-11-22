@@ -6,10 +6,10 @@ class TalesController < ApplicationController
   # GET
   def index #Root
     @tales = Tale.order(created_at: :desc) #Tales#Index @tales in DESCENDING order
+    @tale = Tale.new 
   end
   # GET
   def show #/tales/:id
-    #Tales#Show empty action for append tale
   end
   # GET
   def new #/tales/new
