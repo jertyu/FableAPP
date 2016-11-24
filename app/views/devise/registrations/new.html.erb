@@ -1,19 +1,19 @@
 <div class="container">
-<div id="main-back" style="justify-content:center;align-items:center;margin-top: 65px;">
+<div id="main-back" style="margin-top: 60px"> <!-- just temporary... !-->
 <div class="form-wrapper">
 <div id="content">
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>    
-  <div class="form-group">
-      <%= f.input :username, required: true, autofocus: true %>
-      <%= f.input :email, required: true %>
-      <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-      <%= f.input :password_confirmation, required: true %>
-    </div>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= f.error_notification %>
     <div class="form-group text-center">
-      <%= f.button :submit, "Register", class: 'btn-success' %>
-    </div>
-  <% end %>
+    <h2>Create Your Account</h2>
+              <%= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email', input_html: { class: 'input-lg' } %>
+              <%= f.input :username, required: true, label: false, placeholder: 'User Name', input_html: { class: 'input-lg' } %>
+              <%= f.input :password, required: true, label: false, placeholder: 'Password', input_html: { class: 'input-lg' } %>
+              <%= f.input :password_confirmation, required: true, label: false, placeholder: 'Confirm Password', input_html: { class: 'input-lg' } %>
+              <%= f.button :submit, "Register", class: 'btn-lg btn-info' %>
+              <% end %>
+              <%= button_to "Already have an account? Login", root_path, {:method => :get, :class=>"btn-lg btn-info"} %>
+              </div>
 </div>
 </div>
 </div>
