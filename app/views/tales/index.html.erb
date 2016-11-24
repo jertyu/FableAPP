@@ -22,11 +22,14 @@
                </div>
                <div id="dr1" style="float: left;">
                   <p><%= link_to 'comments', tale %>
-                     <% if current_user && tale.user == current_user || current_user && current_user.admin? %>
-                     <%= link_to 'edit', edit_tale_path(tale) %>
-                     <%= link_to 'delete', tale_path(tale.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+                     <% if current_user && tale.user.owner? && current_user.owner? %>
+                        <%= link_to 'edit', edit_tale_path(tale) %>
+                        <%= link_to 'delete', tale_path(tale.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+                     <% elsif current_user && tale.user == current_user || current_user && current_user.admin? && !tale.user.owner? %>
+                        <%= link_to 'edit', edit_tale_path(tale) %>
+                        <%= link_to 'delete', tale_path(tale.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+                     <% end %>
                   </p>
-                  <% end %>
                </div>
             </div>
          </div>

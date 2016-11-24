@@ -67,7 +67,7 @@ class TalesController < ApplicationController
       params.require(:tale).permit(:content) #Only content atm. Will have categories, and may have titles. 
     end
     def owned_tale #tale auth
-      unless current_user && current_user == @tale.user || current_user && current_user.admin?#current_user=@tale.user or current_user.admin?
+      unless current_user && current_user == @tale.user || current_user && current_user.admin? && !@tale.user.owner? || current_user && current_user.owner?
       flash[:alert] = "Access denied" #flash msg
       redirect_to root_path #redirect
     end

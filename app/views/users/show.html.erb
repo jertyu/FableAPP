@@ -18,7 +18,8 @@
                <% elsif User.find_by_username(params[:id]).admin? %> ADMIN <% end %>
                <% if current_user && current_user == User.find_by_username(params[:id]).owner? %> 
                <%= link_to "Edit Profile", edit_user_path %>
-               <% elsif current_user && current_user == User.find_by_username(params[:id]) %>
+               <% elsif current_user && current_user == User.find_by_username(params[:id]) || current_user && 
+               current_user.admin? && !User.find_by_username(params[:id]).owner? %>
                <%= link_to "Settings",  edit_user_registration_path %>
                <%= link_to "Edit Profile", edit_user_path %>
                <% end %>
@@ -29,12 +30,12 @@
       <div class="post-wrapper">
          <div id="content">
             <%= simple_form_for @tale, html: { class: 'form-horizontal', multipart: true } do |f| %>
-         <div class="form-group text-center">
-            <%= f.input :content %>
-         </div>
-         <div class="form-group text-center">
-            <%= f.button :submit, class: 'btn-success' %>
-         </div>
+            <div class="form-group text-center">
+               <%= f.input :content %>
+            </div>
+            <div class="form-group text-center">
+               <%= f.button :submit, class: 'btn-success' %>
+            </div>
             <% end %>
          </div>
       </div>
@@ -49,11 +50,15 @@
                </div>
                <div id="dr1" style="float: left;">
                   <p><%= link_to 'comments', tale %>
-                     <% if current_user && tale.user == current_user || current_user && current_user.admin? %>
+                     <% if current_user && current_user == User.find_by_username(params[:id]).owner? %> 
                      <%= link_to 'edit', edit_tale_path(tale) %>
                      <%= link_to 'delete', @tale, method: :delete, data: { confirm: 'Are you sure?' } %>
+                     <% elsif current_user && tale.user == current_user || current_user && current_user.admin? && !User.find_by_username(params[:id]).owner? %>
+                     <%= link_to 'edit', edit_tale_path(tale) %>
+                     <%= link_to 'delete', @tale, method: :delete, data: { confirm: 'Are you sure?' } %>
+                     <% end %>
                   </p>
-                  <% end %>
+                  
                </div>
             </div>
          </div>

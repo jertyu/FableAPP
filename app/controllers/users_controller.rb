@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 		@user = User.find_by_username(params[:id])
 	end
     def owned_user #user auth
-      unless current_user && current_user == User.find_by_username(params[:id]) || current_user && current_user.admin? #edit_user auth
+      unless current_user && current_user == User.find_by_username(params[:id]) || current_user && current_user.admin? && !User.find_by_username(params[:id]).owner? || current_user.owner?
       flash[:alert] = "Access denied" #flash msg
       redirect_to root_path #temporary redirect
     end	
