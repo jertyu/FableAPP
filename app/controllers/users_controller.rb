@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user! #All user#action require current_user
   before_action :owned_user, only: [:edit_user] #Denies access to :edit,:update,:destroy unless fit condition
 
 	# GET
@@ -10,7 +9,7 @@ class UsersController < ApplicationController
 		@tales = @user_tale.order('created_at DESC') #Sets @user_tale = to @user_tale.order
 		end
 		#Basically this is a bad hack to set @tales to descending. Also if a user exists. 
-		@tale = Tale.new
+		@tale = Tale.new #For creating a tale on user profiles
 	end
 
 	# GET

@@ -1,6 +1,6 @@
 class TalesController < ApplicationController
   before_action :set_tale, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user! #All index#action require current_user
+  before_action :authenticate_user!, except: [:show] #All index#action require current_user
   before_action :owned_tale, only: [:edit, :update, :destroy] #Denies access to :edit,:update,:destroy unless fit condition
 
   # GET
