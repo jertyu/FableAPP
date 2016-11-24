@@ -14,13 +14,13 @@
       <div class="post-wrapper">
          <div id="content">
             <p>
-               <%= @user.username %> #<%= @user.id %><% if User.find_by_username(params[:id]).admin? %> ADMIN <% end %>
-               <% if current_user && current_user == User.find_by_username(params[:id]) %> | 
+               <%= @user.username %> #<%= @user.id %><% if User.find_by_username(params[:id]).owner? %> OWNER   
+               <% elsif User.find_by_username(params[:id]).admin? %> ADMIN <% end %>
+               <% if current_user && current_user == User.find_by_username(params[:id]).owner? %> 
+               <%= link_to "Edit Profile", edit_user_path %>
+               <% elsif current_user && current_user == User.find_by_username(params[:id]) %>
                <%= link_to "Settings",  edit_user_registration_path %>
                <%= link_to "Edit Profile", edit_user_path %>
-               <% if current_user && current_user.admin? %>
-               <%= link_to "Edit Profile", edit_user_path %>
-               <% end %>
                <% end %>
             </p>
          </div>
